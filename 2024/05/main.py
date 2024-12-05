@@ -17,38 +17,38 @@ def update_successors(args: List[int]):
     succmap[args[0]].add(args[1])
 
 
-def validate_updates(updates: List[int]) -> bool:
+def validate_update(update: List[int]) -> bool:
     """
-    Validate the ordering of the given updates according to the map of successors.
+    Validate the ordering of the given update according to the map of successors.
     """
-    for i, up in enumerate(updates):
-        if i == len(updates) - 1:
+    for i, page in enumerate(update):
+        if i == len(update) - 1:
             continue
 
-        if updates[i + 1] not in succmap.get(up, set()):
+        if update[i + 1] not in succmap.get(page, set()):
             return False
 
     return True
 
 
-def fix_updates(updates: List[int]) -> List[int]:
-    # updates as a set
-    updates_set = set(updates)
+def fix_update(update: List[int]) -> List[int]:
+    # update as a set
+    update_set = set(update)
 
     # number of successors for each update in the update set
     successor_counts = []
-    for i, up in enumerate(updates):
+    for i, page in enumerate(update):
         # size of intersection of the update map and all the successors of the current update
-        successors = len(updates_set.intersection(succmap.get(up, set())))
+        successors = len(update_set.intersection(succmap.get(page, set())))
         successor_counts.append(successors)
 
-    fixed_updates = [-1] * len(updates)
+    fixed_update = [-1] * len(update)
     for i, cnt in enumerate(successor_counts):
-        # by knowing the number of successors in the original updates list, we can find the correct index
-        new_i = len(updates) - cnt - 1
-        fixed_updates[new_i] = updates[i]
+        # by knowing the number of successors in the original update list, we can find the correct index
+        new_i = len(update) - cnt - 1
+        fixed_update[new_i] = update[i]
 
-    return fixed_updates
+    return fixed_update
 
 
 with open(os.path.join(dir_path, 'input.txt'), 'r') as f:
@@ -63,13 +63,13 @@ with open(os.path.join(dir_path, 'input.txt'), 'r') as f:
 
             update_successors([int(x) for x in line.split('|')])
         else:
-            updates = [int(x) for x in line.split(',')]
+            update = [int(x) for x in line.split(',')]
 
-            if validate_updates(updates):
-                correct_count += updates[len(updates) // 2]
+            if validate_update(update):
+                correct_count += update[len(update) // 2]
             else:
-                fixed_updates = fix_updates(updates)
-                incorrect_count += fixed_updates[len(fixed_updates) // 2]
+                fixed_update = fix_update(update)
+                incorrect_count += fixed_update[len(fixed_update) // 2]
 
     print(correct_count)
     print(incorrect_count)
