@@ -17,7 +17,7 @@ transitions = {
     'u': {'l': 'l'},
     'l': {'(': 'open'},
     # Start of num1
-    'open': {**{str(i): 'num1_1' for i in range(1, 10)},'0': 'num1_0'},
+    'open': {**{str(i): 'num1_1' for i in range(1, 10)}, '0': 'num1_0'},
     'num1_0': {',': ','},  # if num1 was '0'
     # After First digit of num1
     'num1_1': {**{str(i): 'num1_2' for i in range(10)}, ',': ','},
