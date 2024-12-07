@@ -38,7 +38,7 @@ def fix_update(update: List[int]) -> List[int]:
     # number of successors for each update in the update set
     successor_counts = []
     for i, page in enumerate(update):
-        # size of intersection of the update map and all the successors of the current update
+        # size of intersection of the update set and all the successors of the current page
         successors = len(update_set.intersection(succmap.get(page, set())))
         successor_counts.append(successors)
 
