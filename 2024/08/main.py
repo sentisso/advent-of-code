@@ -68,6 +68,7 @@ def part_two():
                 pos_diff = ant2_pos - ant1_pos
 
                 # repeat frequency
+                # idea for small optimization: calculate last index, add antinodes without checking the bounds
                 antinode = ant2_pos - pos_diff
                 while is_valid_pos(antinode):
                     antinodes.add(tuple(antinode))
