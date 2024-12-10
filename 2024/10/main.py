@@ -10,7 +10,7 @@ grid = np.genfromtxt(os.path.join(dir_path, 'input.txt'), delimiter=1, dtype=np.
 
 def get_valid_neighbors(pos: Tuple):
     """
-    Valid neighbors are the ones that are in the grid and are greater by 1.
+    Valid neighbors are the ones that (a) are in the grid and (b) are greater by 1.
     """
     neighbors = [(pos[0] + 1, pos[1]), (pos[0] - 1, pos[1]), (pos[0], pos[1] + 1), (pos[0], pos[1] - 1)]
 
@@ -23,7 +23,7 @@ def get_valid_neighbors(pos: Tuple):
     )
 
 
-def part_one_two(ignore_visits=False):
+def part_one_two(ignore_visited=False):
     trailheads = np.array(np.where(grid == 0)).T
 
     # queue of positions
@@ -45,7 +45,7 @@ def part_one_two(ignore_visits=False):
                 continue
 
             for neighbor in get_valid_neighbors(pos):
-                if ignore_visits or neighbor not in visited:
+                if ignore_visited or neighbor not in visited:
                     visited.add(neighbor)
                     Q.append(neighbor)
 
@@ -55,4 +55,4 @@ def part_one_two(ignore_visits=False):
 
 
 part_one_two()
-part_one_two(ignore_visits=True)  # easy pt2 lol :D
+part_one_two(ignore_visited=True)  # easy pt2 lol :D
