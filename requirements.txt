@@ -1,3 +1,4 @@
 pandas
 numpy
 automata-lib
+advent-of-code-data
