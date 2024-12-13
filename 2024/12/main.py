@@ -31,20 +31,6 @@ def pos_diff(pos1: Tuple, pos2: Tuple):
     return pos1[0] - pos2[0], pos1[1] - pos2[1]
 
 
-def is_same_side(side_visits: Set, pos: Tuple, inneighbors: List[Tuple], outneighbor: Tuple):
-    """
-    Is same side if there's an existing inneighbor with the same orientation.
-    """
-    orientation = pos_diff(outneighbor, pos)
-
-    for inneighbor in inneighbors:
-        nside_key = inneighbor + orientation
-        if nside_key in side_visits:
-            return True
-
-    return False
-
-
 directions = np.array([[0, 1], [0, -1], [1, 0], [-1, 0]])
 
 
